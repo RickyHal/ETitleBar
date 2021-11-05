@@ -1,7 +1,7 @@
 # ETitleBar
 [![](https://jitpack.io/v/RickyHal/ETitleBar.svg)](https://jitpack.io/#RickyHal/ETitleBar)
 
-一个简单的顶部导航栏创建工具。支持大部分情况下的顶部导航栏需求。[Blog]()
+一个简单的顶部导航栏创建工具。支持大部分情况下的顶部导航栏需求。[Blog](https://juejin.cn/post/7027114415228977165/)
 
 ETitleBar将顶部导航栏区域分为了三份，分别是左中右
 
