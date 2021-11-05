@@ -32,7 +32,7 @@ ETitleBar将顶部导航栏区域分为了三份，分别是左中右
         |-- ContentView //真正的 ContentView
 ```
 
-<img src="/results/img_1.png" width="260">
+<img src="/results/img_1.png" >
 
 # 依赖配置
 Project build.gradle
