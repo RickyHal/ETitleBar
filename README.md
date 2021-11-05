@@ -2,12 +2,10 @@
 [![](https://jitpack.io/v/RickyHal/ETitleBar.svg)](https://jitpack.io/#RickyHal/ETitleBar)
 
 一个简单的顶部导航栏创建工具。支持大部分情况下的顶部导航栏需求。[Blog](https://juejin.cn/post/7027114415228977165/)
+<img src="/results/img.png" width="260">
 
 ETitleBar将顶部导航栏区域分为了三份，分别是左中右
-
-![未命名文件 (5).jpg](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/27a09bf1836545c78340f4a7af73c2a3~tplv-k3u1fbpfcp-watermark.image?)
-
-<img src="./img.png" width="50%" height="50%"/>
+<img src="/results/img_2.png" width="260">
 
 其中左边和右边区域的默认宽高等于设置的导航栏的高度，默认是***48dp***，中间区域的宽度等于屏幕宽度减去2*导航栏高度。当左边或右边区域添加了多个按钮或文字时，其区域宽度会自动扩张挤压中间区域的宽度。
 
@@ -33,7 +31,8 @@ ETitleBar将顶部导航栏区域分为了三份，分别是左中右
         |-- ContentView //真正的 ContentView
 ```
 
-![未命名文件 (6).jpg](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5c316cbc1dbd4740a7c3252d89c3a9b7~tplv-k3u1fbpfcp-watermark.image?)
+<img src="/results/img_1.png" width="260">
+
 # 依赖配置
 Project build.gradle
 ```groovy
