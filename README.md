@@ -50,6 +50,7 @@ Module build.gradle
 dependencies {
     implementation 'com.github.RickyHal:ETitleBar:$latest_version'
 }
+```
 
 # 使用方法
 Activity的Theme需要使用NoActionBar，例如
