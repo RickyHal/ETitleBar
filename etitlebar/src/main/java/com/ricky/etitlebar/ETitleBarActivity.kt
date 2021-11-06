@@ -15,11 +15,12 @@ abstract class ETitleBarActivity : AppCompatActivity(), OnTitleBarClickListener 
     private var isInitedTitleBar = false
 
     private fun initTitleBar(view: View): View {
-        titleBar = createTitleBar().setOnClickListener(this).build()
+        val builder = createTitleBar() ?: return view
+        titleBar = builder.setOnClickListener(this).build()
         return titleBar.init(view).also { isInitedTitleBar = true }
     }
 
-    protected abstract fun createTitleBar(): ETitleBar.Builder
+    protected abstract fun createTitleBar(): ETitleBar.Builder?
 
     override fun setContentView(view: View?) {
         view ?: return

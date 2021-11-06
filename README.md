@@ -76,7 +76,7 @@ Activity的Theme需要使用NoActionBar，例如
 让项目的BaseActivity继承自ETitleBarActivity，然后重写createTitleBar方法即可
 ```kotlin
 abstract class BaseActivity : ETitleBarActivity() {
-    override fun createTitleBar(): ETitleBar.Builder {
+    override fun createTitleBar(): ETitleBar.Builder? {
         return ETitleBar.Builder(this)
             .setTitle("ETitleBar Demo")
             .fitsSystemWindows(true)
@@ -86,6 +86,7 @@ abstract class BaseActivity : ETitleBarActivity() {
     }
 }
 ```
+
 MainActivity中
 ```kotlin
 class MainActivity : BaseActivity() {
@@ -97,6 +98,16 @@ class MainActivity : BaseActivity() {
     }
 }
 ```
+
+如果当前页面不需要TitleBar，则在createTitleBar中返回null即可
+```kotlin
+abstract class BaseActivity : ETitleBarActivity() {
+    override fun createTitleBar(): ETitleBar.Builder? {
+        return null
+    }
+}
+```
+
 ### 更新导航栏
 ```kotlin
 override fun onCreate(savedInstanceState: Bundle?) {

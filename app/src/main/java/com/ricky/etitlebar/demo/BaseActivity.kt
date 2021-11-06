@@ -15,7 +15,7 @@ abstract class BaseActivity : ETitleBarActivity() {
     protected val Int.dp
         get() = (this * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
 
-    override fun createTitleBar(): ETitleBar.Builder {
+    override fun createTitleBar(): ETitleBar.Builder? {
         return ETitleBar.Builder(this)
             .setTitle("ETitleBar Demo")
             .fitsSystemWindows(true)
