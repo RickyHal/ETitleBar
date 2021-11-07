@@ -30,6 +30,19 @@ android {
     buildFeatures {
         viewBinding true
     }
+    tasks.whenTaskAdded { task ->
+        if (task.name.startsWith("assemble")) {
+            task.doLast {
+                android.applicationVariants.all { variant ->
+                    File outputPath = new File("${rootDir}/results/apk/" + variant.versionName)
+                    copy {
+                        from variant.outputs[0].outputFile
+                        into outputPath
+                    }
+                }
+            }
+        }
+    }
 }
 
 dependencies {

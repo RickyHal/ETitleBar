@@ -1,7 +1,9 @@
 # ETitleBar
+
 [![](https://jitpack.io/v/RickyHal/ETitleBar.svg)](https://jitpack.io/#RickyHal/ETitleBar)
 
 一个简单的顶部导航栏创建工具。支持大部分情况下的顶部导航栏需求。[Blog](https://juejin.cn/post/7027114415228977165/)
+。<a href="https://github.com/RickyHal/ETitleBar/tree/main/results/apk">Demo下载</a>
 <img src="/results/img.png" width="260">
 
 ETitleBar将顶部导航栏区域分为了三份，分别是左中右
@@ -15,37 +17,40 @@ ETitleBar将顶部导航栏区域分为了三份，分别是左中右
 整个界面的树状结构如下：
 
 ```kotlin
-|-- DecorView
-    |-- RelativeLayout // 封装TitleBar和ContentView的Layout
-        |-- RelativeLayout // 顶部导航栏View
-            ｜-- ConstraintLayout  // 主要是为了方便适配fitSystemWindows
-                ｜-- LinearLayout  // 左边区域Layout
-                    ｜-- ImageTextView  // 可以设置文字和图片的View
-                    ｜-- ... // 可以添加多个
-                ｜-- LinearLayout  // 中间区域Layout
-                    ｜-- ImageTextView  // 可以设置文字和图片的View
-                    ｜-- ... // 可以添加多个
-                ｜-- LinearLayout  // 右边区域Layout
-                    ｜-- ImageTextView  // 可以设置文字和图片的View
-                    ｜-- ... // 可以添加多个
-        |-- ShadowView // 阴影View
-        |-- ContentView //真正的 ContentView
+|--DecorView
+|--RelativeLayout // 封装TitleBar和ContentView的Layout
+|--RelativeLayout // 顶部导航栏View
+｜--ConstraintLayout  // 主要是为了方便适配fitSystemWindows
+｜--LinearLayout  // 左边区域Layout
+｜--ImageTextView  // 可以设置文字和图片的View
+｜--... // 可以添加多个
+｜--LinearLayout  // 中间区域Layout
+｜--ImageTextView  // 可以设置文字和图片的View
+｜--... // 可以添加多个
+｜--LinearLayout  // 右边区域Layout
+｜--ImageTextView  // 可以设置文字和图片的View
+｜--... // 可以添加多个
+|--ShadowView // 阴影View
+|--ContentView //真正的 ContentView
 ```
 
 <img src="/results/img_1.png" >
 
 # 依赖配置
+
 Project build.gradle
+
 ```groovy
 allprojects {
     repositories {
         ...
         maven { url 'https://www.jitpack.io' }
-        }
+    }
 }
 ```
 
 Module build.gradle
+
 ```groovy
 dependencies {
     implementation 'com.github.RickyHal:ETitleBar:$latest_version'
@@ -53,8 +58,11 @@ dependencies {
 ```
 
 # 使用方法
+
 Activity的Theme需要使用NoActionBar，例如
+
 ```xml
+
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.ETitleBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -72,8 +80,11 @@ Activity的Theme需要使用NoActionBar，例如
     </style>
 </resources>
 ```
+
 ### 创建导航栏
+
 让项目的BaseActivity继承自ETitleBarActivity，然后重写createTitleBar方法即可
+
 ```kotlin
 abstract class BaseActivity : ETitleBarActivity() {
     override fun createTitleBar(): ETitleBar.Builder? {
@@ -88,6 +99,7 @@ abstract class BaseActivity : ETitleBarActivity() {
 ```
 
 MainActivity中
+
 ```kotlin
 class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -100,6 +112,7 @@ class MainActivity : BaseActivity() {
 ```
 
 如果当前页面不需要TitleBar，则在createTitleBar中返回null即可
+
 ```kotlin
 abstract class BaseActivity : ETitleBarActivity() {
     override fun createTitleBar(): ETitleBar.Builder? {
@@ -109,6 +122,7 @@ abstract class BaseActivity : ETitleBarActivity() {
 ```
 
 ### 更新导航栏
+
 ```kotlin
 override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -121,7 +135,9 @@ override fun onCreate(savedInstanceState: Bundle?) {
 ```
 
 ### 点击事件监听
+
 在Activity中重写下面三个方法即可
+
 ```kotlin
 class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -147,6 +163,7 @@ class MainActivity : BaseActivity() {
 ```
 
 ### 可用属性
+
 ```kotlin
 ETitleBar.Builder(this)
     .setLeftButtonText("Back")  // 设置左边按钮文字
