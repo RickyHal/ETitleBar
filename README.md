@@ -251,6 +251,8 @@ ETitleBar.Builder(this)
     .hasLeftButton(true) // 是否显示左侧区域
     .hasCenter(true)    // 是否显示中间区域
     .hasRightButton(true)   // 是否显示右边区域
+    .show() // 显示导航栏
+    .hide() // 隐藏导航栏
     .setOnClickListener(object : OnTitleBarClickListener {
         // 左边区域按钮被点击
         override fun onLeftClick(index: Int, view: View, layout: LinearLayout) {

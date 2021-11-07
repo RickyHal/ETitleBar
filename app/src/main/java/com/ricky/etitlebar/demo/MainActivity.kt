@@ -22,6 +22,7 @@ class MainActivity : BaseActivity() {
     private var isRightBold = false
     private var shadowGradient = true
     private var showShadow = true
+    private var showTitleBar = true
     private var isFitSystemWindows = true
     private var isOverlapTitleBar = false
     private var showLeft = true
@@ -552,6 +553,12 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initCommon() {
+        binding.btnShowTitleBar.setOnClickListener {
+            updateTitleBar {
+                if (showTitleBar) hide() else show()
+                showTitleBar = !showTitleBar
+            }
+        }
         binding.btnOverlapStatusbar.setOnClickListener {
             updateTitleBar {
                 fitsSystemWindows(!isFitSystemWindows)

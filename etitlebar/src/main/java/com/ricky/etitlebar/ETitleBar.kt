@@ -60,7 +60,11 @@ class ETitleBar private constructor(context: Context) : RelativeLayout(context) 
             return imageTextView
         }
 
-        internal fun createShadowView(context: Context, width: Int = LinearLayout.LayoutParams.MATCH_PARENT, height: Int = SHADOW_HEIGHT): ShadowView {
+        internal fun createShadowView(
+            context: Context,
+            width: Int = LinearLayout.LayoutParams.MATCH_PARENT,
+            height: Int = SHADOW_HEIGHT
+        ): ShadowView {
             val imageView = ShadowView(context)
             imageView.layoutParams = LinearLayout.LayoutParams(width, height)
             return imageView
@@ -99,6 +103,7 @@ class ETitleBar private constructor(context: Context) : RelativeLayout(context) 
 
     private fun setup(builder: Builder) {
         builder.run {
+            visually(showTitleBar)
             titleBarBackground?.let {
                 backgroundView.setImageResource(it)
             } ?: run {
@@ -116,7 +121,7 @@ class ETitleBar private constructor(context: Context) : RelativeLayout(context) 
                 setMargins(0, if (fitSystemWindows) getStatusBarHeight() else 0, 0, 0)
             }
             contentLayoutParam.apply {
-                setMargins(0, if (!builder.overlapTitleBar) layoutParams.height else 0, 0, 0)
+                setMargins(0, if (!builder.overlapTitleBar && showTitleBar) layoutParams.height else 0, 0, 0)
             }
             centerLayout.updateLayoutParams<ConstraintLayout.LayoutParams> {
                 goneStartMargin = titleBarHeight
@@ -194,6 +199,7 @@ class ETitleBar private constructor(context: Context) : RelativeLayout(context) 
         internal var titleBarBackgroundColor: Int = Color.WHITE
         internal var fitSystemWindows: Boolean = true
         internal var overlapTitleBar: Boolean = false
+        internal var showTitleBar: Boolean = true
         internal var clickListener: OnTitleBarClickListener? = null
 
         internal var leftButton: ImageTextView = createButton(context)                                                 // 左边按钮
@@ -783,6 +789,20 @@ class ETitleBar private constructor(context: Context) : RelativeLayout(context) 
          */
         fun hasCenter(hasTitle: Boolean) = apply {
             centerLayout.visually(hasTitle)
+        }
+
+        /**
+         * 显示导航栏
+         */
+        fun show() = apply {
+            showTitleBar = true
+        }
+
+        /**
+         * 隐藏导航栏
+         */
+        fun hide() = apply {
+            showTitleBar = false
         }
 
         /**
