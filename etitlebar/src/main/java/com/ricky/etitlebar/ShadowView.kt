@@ -25,6 +25,14 @@ class ShadowView @JvmOverloads constructor(
 
     init {
         scaleType = ScaleType.CENTER_CROP
+        attrs?.let {
+            context.obtainStyledAttributes(it, R.styleable.ShadowView).apply {
+                mIsReverse = getBoolean(R.styleable.ShadowView_reverse, false)
+                mShadowColor = getColor(R.styleable.ShadowView_shadow_color, -1)
+                recycle()
+            }
+        }
+        setLayerType(LAYER_TYPE_HARDWARE, null)
     }
 
     fun withGradient(flag: Boolean) {
