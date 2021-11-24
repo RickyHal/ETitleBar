@@ -83,12 +83,13 @@ class ETitleBar private constructor(context: Context) : RelativeLayout(context) 
             layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         }
     }
-    private lateinit var builder: Builder
+    internal lateinit var builder: Builder
     private var isSetup = false
     private val contentLayoutParam = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
 
     constructor(builder: Builder) : this(builder.context) {
         this.builder = builder
+        builder.updateCallback = ::setup
         layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         val titleLayoutLp = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         titleLayoutLp.addRule(ALIGN_PARENT_BOTTOM)
@@ -104,6 +105,9 @@ class ETitleBar private constructor(context: Context) : RelativeLayout(context) 
     private fun setup(builder: Builder) {
         builder.run {
             visually(showTitleBar)
+            if (!showTitleBar) {
+                shadowView.gone()
+            }
             titleBarBackground?.let {
                 backgroundView.setImageResource(it)
             } ?: run {
@@ -201,6 +205,7 @@ class ETitleBar private constructor(context: Context) : RelativeLayout(context) 
         internal var overlapTitleBar: Boolean = false
         internal var showTitleBar: Boolean = true
         internal var clickListener: OnTitleBarClickListener? = null
+        internal var updateCallback: (Builder) -> Unit = {}
 
         internal var leftButton: ImageTextView = createButton(context)                                                 // 左边按钮
         internal var titleView: ImageTextView = createButton(context, LayoutParams.WRAP_CONTENT)                       // 标题
@@ -329,12 +334,22 @@ class ETitleBar private constructor(context: Context) : RelativeLayout(context) 
         }
 
         /**
+         * 获取左边按钮，Java用
+         */
+        fun getLeftButton(): ImageTextView = leftButton
+
+        /**
          * 修改左边区域属性
          * @param block
          */
         fun applyLeftLayout(block: (LinearLayout) -> Unit) = apply {
             block(leftLayout)
         }
+
+        /**
+         * 获取左边区域，Java用
+         */
+        fun getLeftLayout(): LinearLayout = leftLayout
 
         /**
          * 设置自定义的Left View
@@ -446,12 +461,22 @@ class ETitleBar private constructor(context: Context) : RelativeLayout(context) 
         }
 
         /**
+         * 获取标题View，Java用
+         */
+        fun getTitleView(): ImageTextView = titleView
+
+        /**
          * 修改中间区域属性
          * @param block
          */
         fun applyCenterLayout(block: (LinearLayout) -> Unit) = apply {
             block(centerLayout)
         }
+
+        /**
+         * 获取中间区域，Java用
+         */
+        fun getCenterLayout(): LinearLayout = centerLayout
 
         /**
          * 设置自定义的Center View
@@ -581,12 +606,22 @@ class ETitleBar private constructor(context: Context) : RelativeLayout(context) 
         }
 
         /**
+         * 获取右侧按钮，Java用
+         */
+        fun getRightButton(): ImageTextView = rightButton
+
+        /**
          * 修改右侧区域属性
          * @param block
          */
         fun applyRightLayout(block: (LinearLayout) -> Unit) = apply {
             block(rightLayout)
         }
+
+        /**
+         * 获取右侧Layout，Java用
+         */
+        fun getRightLayout(): LinearLayout = rightLayout
 
         /**
          * 设置自定义的右边按钮
@@ -824,11 +859,18 @@ class ETitleBar private constructor(context: Context) : RelativeLayout(context) 
         /**
          * 构建导航栏
          */
-        fun build(): ETitleBar {
+        internal fun build(): ETitleBar {
             leftLayout.addView(leftButton)
             centerLayout.addView(titleView)
             rightLayout.addView(rightButton)
             return ETitleBar(this)
+        }
+
+        /**
+         * 更新导航栏，Java使用
+         */
+        fun update() {
+            updateCallback(this)
         }
     }
 }

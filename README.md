@@ -2,7 +2,7 @@
 
 [![](https://jitpack.io/v/RickyHal/ETitleBar.svg)](https://jitpack.io/#RickyHal/ETitleBar)
 
-一个简单的顶部导航栏创建工具。支持大部分情况下的顶部导航栏需求。[Blog](https://juejin.cn/post/7027114415228977165/)
+一个简单的顶部导航栏创建工具，支持Java和Kotlin，支持大部分情况下的顶部导航栏需求。[Blog](https://juejin.cn/post/7027114415228977165/)
 。<a href="https://github.com/RickyHal/ETitleBar/tree/main/results/apk">Demo下载</a>
 <img src="/results/img.png" width="260">
 
@@ -123,6 +123,8 @@ abstract class BaseActivity : ETitleBarActivity() {
 
 ### 更新导航栏
 
+Kotlin Demo
+
 ```kotlin
 override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -130,6 +132,26 @@ override fun onCreate(savedInstanceState: Bundle?) {
         // 在这里面设置导航栏属性即可
         setTitle("Hello world")
         setLeftBackgroundColor(Color.RED)
+    }
+}
+```
+
+Java Demo
+
+```Java
+public class JavaDemoActivity extends BaseActivity {
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = ActivityDemoBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        ETitleBar.Builder titleBar = getTitleBarBuilder();
+        // 需要检查拿到的tittleBar是否为空
+        if (titleBar != null) {
+            titleBar.setLeftBackgroundColor(Color.RED)
+                .setTitle("Hello world")    // 同kotlin
+                .update();  // 必须调用update更新
+        }
     }
 }
 ```

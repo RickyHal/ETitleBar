@@ -53,4 +53,11 @@ abstract class ETitleBarActivity : AppCompatActivity(), OnTitleBarClickListener 
             titleBar.update(block)
         }
     }
+
+    protected fun getTitleBarBuilder(): ETitleBar.Builder? {
+        if (isInitedTitleBar && ::titleBar.isInitialized) {
+            return titleBar.builder
+        }
+        return null
+    }
 }
