@@ -5,7 +5,7 @@
 一个简单的顶部导航栏创建工具，支持Java和Kotlin，支持大部分情况下的顶部导航栏需求。[Blog](https://juejin.cn/post/7027114415228977165/)
 。<a href="https://github.com/RickyHal/ETitleBar/tree/main/results/apk">Demo下载</a>
 
-<img src="/results/guide.png">
+<img src="/results/guide.png" width="500">
 
 ETitleBar将顶部导航栏区域分为了三份，分别是左中右
 
