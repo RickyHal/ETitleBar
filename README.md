@@ -16,24 +16,6 @@ ETitleBar将顶部导航栏区域分为了三份，分别是左中右
 
 整个界面的树状结构如下：
 
-```kotlin
-|--DecorView
-|--RelativeLayout // 封装TitleBar和ContentView的Layout
-|--RelativeLayout // 顶部导航栏View
-｜--ConstraintLayout  // 主要是为了方便适配fitSystemWindows
-｜--LinearLayout  // 左边区域Layout
-｜--ImageTextView  // 可以设置文字和图片的View
-｜--... // 可以添加多个
-｜--LinearLayout  // 中间区域Layout
-｜--ImageTextView  // 可以设置文字和图片的View
-｜--... // 可以添加多个
-｜--LinearLayout  // 右边区域Layout
-｜--ImageTextView  // 可以设置文字和图片的View
-｜--... // 可以添加多个
-|--ShadowView // 阴影View
-|--ContentView //真正的 ContentView
-```
-
 <img src="/results/img_1.png" >
 
 # 依赖配置
@@ -43,7 +25,6 @@ Project build.gradle
 ```groovy
 allprojects {
     repositories {
-        ...
         maven { url 'https://www.jitpack.io' }
     }
 }
@@ -149,8 +130,8 @@ public class JavaDemoActivity extends BaseActivity {
         // 需要检查拿到的tittleBar是否为空
         if (titleBar != null) {
             titleBar.setLeftBackgroundColor(Color.RED)
-                .setTitle("Hello world")    // 同kotlin
-                .update();  // 必须调用update更新
+                    .setTitle("Hello world")    // 同kotlin
+                    .update();  // 必须调用update更新
         }
     }
 }
